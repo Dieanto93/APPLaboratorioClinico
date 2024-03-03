@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirmar Eliminación de Paciente</title>
+  </head>
+  <body>
+    <h2>Confirmar Eliminación de Paciente</h2>
+    <p>
+      ¿Está seguro de que desea eliminar al paciente "{{ paciente.nombre }}"?
+    </p>
+    <form method="post">
+      {% csrf_token %}
+      <input type="submit" value="Sí, Eliminar" />
+      <button onclick="cancelarEliminacion()">Cancelar</button>
+    </form>
+
+    <script>
+      function cancelarEliminacion() {
+        window.history.back(); // Regresar a la página anterior
+      }
+    </script>
+  </body>
+</html>

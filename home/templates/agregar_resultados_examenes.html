@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ingresar Resultados</title>
+    <!-- Agrega cualquier estilo adicional aquí -->
+    <style>
+      /* Estilos para la tabla */
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      /* Estilos para los campos de entrada */
+      .result-input {
+        width: 100px; /* Ajusta el ancho según sea necesario */
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Ingresar Resultados de Examen</h1>
+    <h2>Pedido para: {{ pedido.paciente }}</h2>
+    <!-- Mostrar los datos del pedido en una tabla -->
+    <table>
+      <thead>
+        <tr>
+          <th>Examen</th>
+          <th>Valores de Referencia</th>
+          <th>Valor Resultado</th>
+          <th>Rango</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for examen in pedido.paciente.pedidos_examenes.all %}
+        <tr>
+          <td>{{ examen }}</td>
+          <td>{{ examen.valores_referencia }}</td>
+          <td>
+            <input
+              type="text"
+              name="valor_resultado_{{ examen.id }}"
+              class="result-input"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              name="rango_{{ examen.id }}"
+              class="result-input"
+            />
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit">Guardar Resultados</button>
+    </form>
+  </body>
+</html>

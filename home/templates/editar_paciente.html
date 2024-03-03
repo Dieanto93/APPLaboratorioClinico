@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Editar Paciente</title>
+    <!-- Agrega el enlace al CSS de Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <style>
+      /* Estilos generales */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        margin-top: 0;
+        font-size: 24px;
+        color: #333;
+      }
+
+      form {
+        margin-top: 20px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      input[type="text"],
+      input[type="number"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      button[type="submit"],
+      button[type="button"] {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      button[type="submit"]:hover,
+      button[type="button"]:hover {
+        background-color: #0056b3;
+      }
+
+      .cancel-button {
+        background-color: #dc3545;
+        margin-right: 10px;
+        width: 200px; /* Mismo ancho que el botón de guardar pacientes */
+      }
+
+      .cancel-button:hover {
+        background-color: #bd2130;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Editar Paciente</h2>
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="id_cedula">Cédula:</label>
+          <input
+            type="text"
+            name="cedula"
+            id="id_cedula"
+            value="{{ paciente.cedula }}"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="id_nombre">Nombre:</label>
+          <input
+            type="text"
+            name="nombre"
+            id="id_nombre"
+            value="{{ paciente.nombre }}"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="id_edad">Edad:</label>
+          <input
+            type="number"
+            name="edad"
+            id="id_edad"
+            value="{{ paciente.edad }}"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="id_direccion">Dirección:</label>
+          <input
+            type="text"
+            name="direccion"
+            id="id_direccion"
+            value="{{ paciente.direccion }}"
+            required
+          />
+        </div>
+        <button type="submit">Guardar Cambios</button>
+        <button type="button" class="cancel-button" onclick="cancelEdit()">
+          Cancelar
+        </button>
+      </form>
+    </div>
+
+    <script>
+      function cancelEdit() {
+        // Implementa aquí la lógica para cancelar la edición del paciente, si es necesario
+        // Por ejemplo, puedes redirigir al usuario a otra página o mostrar un mensaje de confirmación
+        // En este ejemplo, simplemente redirigiremos al usuario al dashboard administrativo
+        window.location.href = "{% url 'administrative_dashboard' %}";
+      }
+    </script>
+  </body>
+</html>

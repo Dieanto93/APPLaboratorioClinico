@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ver Pedidos Pendientes</title>
+    <!-- Agrega cualquier estilo adicional aquí -->
+  </head>
+  <body>
+    <h1>Pedidos Pendientes</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Número de Pedido</th>
+          <th>Nombre del Paciente</th>
+          <th>Cédula del Paciente</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for pedido in pedidos %}
+        <tr>
+          <td>{{ pedido.id }}</td>
+          <!-- Asumiendo que id es el número de pedido -->
+          <td>{{ pedido.paciente.nombre }}</td>
+          <td>{{ pedido.paciente.cedula }}</td>
+          <td>
+            <a href="{% url 'ingresar_resultados' pedido.id %}" class="btn"
+              >Ingresar Resultados</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>
